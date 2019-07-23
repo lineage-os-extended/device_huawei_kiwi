@@ -1,0 +1,152 @@
+# Audio
+audio.deep_buffer.media=true
+persist.vendor.audio.dualmic.config=endfire
+persist.vendor.audio.fluence.speaker=true
+persist.vendor.audio.fluence.voicecall=true
+persist.vendor.audio.fluence.voicerec=false
+# can be "fluence" or "fluencepro" or "none"
+ro.vendor.audio.sdk.fluencetype=fluence
+ro.vendor.audio.sdk.ssr=false
+vendor.audio_hal.period_size=240
+vendor.voice.path.for.pcm.voip=true
+vendor.voice.playback.conc.disabled=false
+vendor.voice.record.conc.disabled=false
+vendor.voice.voip.conc.disabled=true
+
+# Audio Offload
+audio.offload.disable=false
+audio.offload.gapless.enabled=true
+audio.offload.min.duration.secs=30
+audio.offload.pcm.enable=true
+audio.offload.video=true
+vendor.audio.offload.buffer.size.kb=64
+
+# Bluetooth
+ro.bluetooth.dun=true
+ro.bluetooth.hfp.ver=1.6
+ro.bluetooth.sap=true
+ro.qualcomm.bt.hci_transport=smd
+vendor.qcom.bluetooth.soc=smd
+
+# Camera
+persist.camera.cpp.duplication=false
+persist.camera.hal.debug=0
+
+# Dalvik
+dalvik.vm.heapstartsize=16m
+dalvik.vm.heapgrowthlimit=192m
+dalvik.vm.heapsize=512m
+dalvik.vm.heaptargetutilization=0.75
+dalvik.vm.heapminfree=2m
+dalvik.vm.heapmaxfree=8m
+
+# Display
+dalvik.vm.zygotemaxfailedboots=5
+debug.composition.type=c2d
+debug.cpurend.vsync=false
+debug.egl.hw=0
+debug.enable.sglscale=1
+debug.hwui.use_buffer_age=false
+debug.mdpcomp.logs=0
+debug.mdpcomp.idletime=600
+debug.sf.hw=0
+persist.demo.hdmirotationlock=false
+persist.hwc.mdpcomp.enable=true
+persist.hwc.ptor.enable=true
+ro.opengles.version=196610
+ro.qualcomm.cabl=0
+ro.qcom.ad=1
+ro.qcom.ad.calib.data=/system/etc/calib_kiw.cfg
+sys.hwc.gpu_perf_mode=1
+
+# DRM
+drm.service.enabled=1
+
+# Fingerprint
+ro.fingerprint.cleanup.unused=false
+
+# Log
+log.tag.VM_BMS=WARN
+
+# Media
+media.aac_51_output_enabled=true
+media.stagefright.enable-player=true
+media.stagefright.enable-http=true
+media.stagefright.enable-aac=true
+media.stagefright.enable-qcp=true
+media.stagefright.enable-fma2dp=true
+media.stagefright.enable-scan=true
+mm.enable.sec.smoothstreaming=true
+mm.enable.smoothstreaming=true
+mmp.enable.3g2=true
+ro.config.media_vol_steps=20
+ro.config.vc_call_vol_steps=10 
+
+# Net
+persist.data.netmgrd.qos.enable=true
+persist.timed.enable=true
+
+# Other
+dev.pm.dyn_samplingrate=1
+qemu.hw.mainkeys=0
+ro.board.platform=msm8916
+ro.qcom.ad.sensortype=2
+ro.sf.lcd_density=480
+ro.vendor.extension_library=libqti-perfd-client.so
+
+# Radio
+DEVICE_PROVISIONED=1
+persist.data.ds_fmc_app.mode=0
+persist.data.qmi.adb_logmask=0
+persist.omh.enabled=0
+persist.radio.add_power_save=1
+persist.radio.apm_sim_not_pwdn=1
+persist.radio.force_nw_search=1
+persist.radio.force_on_dc=true
+persist.radio.modem.cap=7E442
+persist.radio.msgtunnel.start=false
+persist.radio.no_wait_for_card=1
+persist.radio.rat_on=combine
+persist.radio.sib16_support=1
+persist.radio.use_nv_force=false
+ril.subscription.types=NV,RUIM
+rild.libpath=/system/vendor/lib64/libril-wrapper.so
+rild.libargs=-d /dev/smd0
+vendor.rild.libpath=/system/vendor/lib64/libril-wrapper.so
+vendor.rild.libargs=-d /dev/smd0
+ro.config.AC_optimize_plmn_srch=true
+ro.config.dsds_mode=umts_gsm
+ro.config.eons_always_ap=false
+ro.config.force_reject_cause=true
+ro.config.hw_dsda=false
+ro.config.hw_fast_dormancy=true
+ro.config.hw_fdtimer_screenOff=3000
+ro.config.hw_fdtimer_screenOn=-1
+ro.config.hw_roaming_optimize=true
+ro.config.hw_USB_on_enable_FD=true
+ro.config.hw_always_allow_mms=true
+ro.config.hwft_simrefresh=true
+ro.config.launcher_matchcard=1
+ro.config.NW_rescan_after_rej=true
+ro.config.nostore_nw_sel_mode=false
+ro.config.optimize_signal=true
+ro.hwpp.cust_ons_bin=true
+ro.hwpp_dorecoverylevel=1
+ro.hwpp_ds_fail=111,-3
+ro.hwpp.disable_IA=true
+ro.hwpp_sig_stability_switch=true
+ro.multi.rild=true
+ro.ril.hsxpa=1
+ro.ril.gprsclass=10
+ro.telephony.call_ring.multiple=false
+ro.use_data_netmgrd=true
+
+# Security patch level
+ro.lineage.build.vendor_security_patch=2018-02-01
+
+# Tethering
+sys.usb.rps_mask=10
+persist.sys.usb.config.extra=none
+
+# WiFi
+wifi.interface=wlan0

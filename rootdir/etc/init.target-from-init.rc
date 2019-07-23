@@ -1,0 +1,129 @@
+on early-init
+    setprop persist.service.hbd.enable true
+
+# Create cgroup mount point for freezer
+    mkdir /dev/frz
+    mount cgroup none /dev/frz freezer
+
+    chown system system /sys/module/mdss_dsi/parameters/dsi_status_disable
+
+    chown root system /dev/block/mmcblk0p8
+    chmod 0660 /dev/block/mmcblk0p8
+
+on post-fs-data
+# right trigger?
+    mkdir /data/misc/wifi/load 0775 system system
+    mkdir /data/misc/dts 0770 media media
+    symlink /system/etc/srs/srs_processing.cfg /data/misc/dts/srs_processing.cfg
+
+    mkdir /data/midi 0770 media audio
+
+    # Touchscreen gestures & glove mode
+    chown system system /sys/devices/12c.hw-dev-detect/dev_flag
+    chown system system /sys/touch_screen/holster_touch_window
+    chown system system /sys/touch_screen/glove_func/signal_disparity
+    chown system system /sys/touch_screen/easy_wakeup_gesture
+    chown system system /sys/touch_screen/easy_wakeup_supported_gestures
+    chown system system /sys/touch_screen/easy_wakeup_position
+    chown system system /sys/touch_screen/tap_to_wake
+    chmod 0664 /sys/touch_screen/easy_wakeup_gesture
+    chmod 0664 /sys/touch_screen/glove_func/signal_disparity
+
+    chown system system /sys/touch_screen/cyttsp5/command
+    chown system system /sys/touch_screen/cyttsp5/status
+    chown system system /sys/touch_screen/cyttsp5/response
+    restorecon /sys/class/leds/lcd-backlight/brightness
+    restorecon /sys/class/power_supply/battery/charging_enabled
+    restorecon /sys/class/graphics/fb0/inversion_mode
+    restorecon /sys/class/leds/green/brightness
+    restorecon /sys/class/leds/red/brightness
+    restorecon /sys/class/leds/blue/brightness
+    restorecon /sys/class/hw_power/charger/charge_data/enable_charger
+
+    #add for fingerprint
+    chown system system /dev/fpc1020
+    chmod 0660 /dev/fpc1020
+    chown system system /sys/devices/platform/fingerprint/diag/result
+    chown system system /sys/devices/platform/fingerprint/diag/navigation_enable
+    chown system system /sys/devices/platform/fingerprint/diag/wakeup_enable
+    chown system system /sys/devices/platform/fingerprint/diag/chip_id
+    chown system system /sys/devices/platform/fingerprint/diag/selftest
+    chown system system /sys/devices/platform/fingerprint/diag/fingerdetect
+    chown system system /sys/devices/platform/fingerprint/diag/spi_ctl
+    chown system system /sys/devices/platform/fingerprint/setup/adc_gain
+    chown system system /sys/devices/platform/fingerprint/setup/adc_shift
+    chown system system /sys/devices/platform/fingerprint/setup/capture_mode
+    chown system system /sys/devices/platform/fingerprint/setup/capture_count
+    chown system system /sys/devices/platform/fingerprint/setup/capture_col_groups
+    chown system system /sys/devices/platform/fingerprint/setup/capture_col_start
+    chown system system /sys/devices/platform/fingerprint/setup/capture_row_count
+    chown system system /sys/devices/platform/fingerprint/setup/capture_row_start
+    chown system system /sys/devices/platform/fingerprint/setup/capture_settings_mux
+    chown system system /sys/devices/platform/fingerprint/setup/pxl_ctrl
+    chown system system /sys/devices/platform/fingerprint/fingerprint_chip_info
+
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
+    chown root system /sys/class/power_supply/battery/charging_enabled
+    chmod 0664 /sys/class/power_supply/battery/charging_enabled
+    chown root system /sys/module/qpnp_linear_charger/parameters/charge_no_limit
+    chown root system /sys/class/hw_power/charger/charge_data/enable_charger
+    chmod 0664 /sys/class/hw_power/charger/charge_data/enable_charger
+    chown root system /sys/class/hw_power/charger/charge_data/iin_runningtest
+    chmod 0664 /sys/class/hw_power/charger/charge_data/iin_runningtest
+    chown system system /sys/class/power_supply/battery/factory_diag
+    chown system system /sys/class/power_supply/battery/hot_current_limit
+    restorecon /sys/class/power_supply/battery/hot_current_limit
+    chown system system /sys/class/power_supply/battery/input_current_max
+
+    chown system system /sys/devices/8789.huawei_hall_sensor/enable_hall_sensor
+    # Don't let blobs disable this sensor
+    chmod 000 /sys/devices/8789.huawei_hall_sensor/enable_hall_sensor
+    chown system system /sys/devices/8789.huawei_hall_sensor/camera_overturn_num
+    chown system system /sys/devices/8789.huawei_hall_sensor/get_camera_status
+    chown system system /sys/devices/8789.huawei_hall_sensor/mmi_camera_hall_status
+    chown root system /sys/devices/soc0/huawei_product
+
+    chown system system /sys/class/graphics/fb0/mipi_crc
+    chown system system /sys/class/graphics/fb0/inversion_mode
+    chown system system /sys/class/graphics/fb0/panel_status
+    chown system system /sys/class/graphics/fb0/lcd_checksum
+    chown system system /sys/class/graphics/fb0/lcd_comform_mode
+    chown system system /sys/class/graphics/fb0/lcd_support_mode
+
+service oeminfo_nvm /system/vendor/bin/oeminfo_nvm_server
+    class core
+    user root
+
+service rmt_oeminfo /system/vendor/bin/rmt_oeminfo
+    class core
+    user root
+
+service teecd /system/vendor/bin/teecd
+    class core
+    user system
+    group system
+
+service signinfolistener /system/vendor/bin/signinfolistener
+    class core
+    user system
+    group system readproc
+
+service libqmi_oem_main /system/vendor/bin/libqmi_oem_main
+    class main
+    group wakelock
+
+# disable enable_swap
+
+service huawei_version /system/vendor/bin/huawei_version
+    class core
+    user root
+    oneshot
+
+on property:persist.sys.hlcharging=true
+    write /sys/class/power_supply/battery/device/not_limit_chrg_flag 1
+    mkdir system/etc/tp_test_parameters
+
+on property:hw.accel.calib="true"
+    chmod 0664 /dev/input/event*
