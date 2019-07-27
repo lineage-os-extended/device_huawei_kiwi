@@ -32,9 +32,6 @@ vendor.qcom.bluetooth.soc=smd
 persist.camera.cpp.duplication=false
 persist.camera.hal.debug=0
 
-# Creat zram disk
-ro.config.zram=true
-
 # Low ram addon
 ro.config.low_ram=true
 
